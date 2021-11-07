@@ -23,12 +23,16 @@ const options = {
           buttonRef.removeAttribute('disabled');
           buttonRef.addEventListener('click', () => {
               buttonRef.setAttribute('disabled', 'disabled');
-              setInterval(() => {
+              inputRef.setAttribute('disabled', 'disabled');
+            const timerInterval = setInterval(() => {
                   const currentTime = Date.now();
                   const timeDiffer = selectedDates[0].getTime() - currentTime;
                   const timeToSelectedDate = convertMs(timeDiffer);
                   console.log(timeToSelectedDate);
                   updateClockInterface(timeToSelectedDate);
+                  if (timeDiffer === 0) {
+                      clearInterval(timerInterval);
+                  }
               }, 1000)
              
           });
