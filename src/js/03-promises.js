@@ -27,28 +27,31 @@ function createPromise(position, delay) {
 
 function onFormSubmit(evt) {
   evt.preventDefault();
-  let currentDelay = Number(onDelayChange());
-  let amountValue = Number(onAmountChange());
-  let stepValue = Number(onStepChange());
+  const delayValue = Number(onDelayChange());
+  const amountValue = Number(onAmountChange());
+  const stepValue = Number(onStepChange());
   
-
+  let currentDelay = delayValue;
+  
   for (let i = 0; i < amountValue; i += 1) {
+    
     createPromise(i + 1, currentDelay)
       .then(({ position, delay}) => {
         setTimeout(() => {
           console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
           Notify.success(`Fulfilled promise ${position} in ${delay}ms`);
+         
         }, currentDelay)
       })
       .catch(({position, delay}) => {
         setTimeout(() => {
           console.log(`❌ Rejected promise ${position} in ${delay}ms`);
           Notify.failure(`Rejected promise ${position} in ${delay}ms`);
+          
         },currentDelay)
     
       })
     currentDelay += stepValue;
-    
   }
     
   
