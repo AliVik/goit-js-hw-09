@@ -22,12 +22,13 @@ const options = {
       if (selectedDates[0].getTime() > startTime) {
           buttonRef.removeAttribute('disabled');
           buttonRef.addEventListener('click', () => {
+              buttonRef.setAttribute('disabled', 'disabled');
               setInterval(() => {
                   const currentTime = Date.now();
                   const timeDiffer = selectedDates[0].getTime() - currentTime;
                   const timeToSelectedDate = convertMs(timeDiffer);
                   console.log(timeToSelectedDate);
-                    
+                  updateClockInterface(timeToSelectedDate);
               }, 1000)
              
           });
@@ -43,10 +44,10 @@ buttonRef.setAttribute('disabled', 'disabled');
 flatpickr(inputRef, options);
 
 function updateClockInterface({days,hours,minutes,seconds}) {
-    daysRef.value = `${days}`;
-    hoursRef.value = `${hours}`;
-    minutesRef.value = `${minutes}`;
-    secondsRef.value = `${seconds}`;
+    daysRef.textContent = `${days}`;
+    hoursRef.textContent = `${hours}`;
+    minutesRef.textContent = `${minutes}`;
+    secondsRef.textContent = `${seconds}`;
 
 }
 
