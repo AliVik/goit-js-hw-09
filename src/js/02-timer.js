@@ -10,6 +10,7 @@ const minutesRef = document.querySelector('[data-minutes]');
 const secondsRef = document.querySelector('[data-seconds]');
 const startTime = Date.now();
 
+buttonRef.setAttribute('disabled', 'disabled');
 
 const options = {
   enableTime: true,
@@ -21,9 +22,11 @@ const options = {
       
       if (selectedDates[0].getTime() > startTime) {
           buttonRef.removeAttribute('disabled');
+
           buttonRef.addEventListener('click', () => {
               buttonRef.setAttribute('disabled', 'disabled');
               inputRef.setAttribute('disabled', 'disabled');
+
             const timerInterval = setInterval(() => {
                   const currentTime = Date.now();
                   const timeDiffer = selectedDates[0].getTime() - currentTime;
@@ -44,7 +47,7 @@ const options = {
   },
 };
 
-buttonRef.setAttribute('disabled', 'disabled');
+
 flatpickr(inputRef, options);
 
 function updateClockInterface({days,hours,minutes,seconds}) {
