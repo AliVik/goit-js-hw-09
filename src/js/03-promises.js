@@ -40,8 +40,10 @@ function onFormSubmit(evt) {
         setTimeout(() => {
           console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
           Notify.success(`Fulfilled promise ${position} in ${delay}ms`);
-         
+       
         }, currentDelay)
+        delay  = currentDelay;
+        return currentDelay += stepValue;
       })
       .catch(({position, delay}) => {
         setTimeout(() => {
@@ -49,9 +51,10 @@ function onFormSubmit(evt) {
           Notify.failure(`Rejected promise ${position} in ${delay}ms`);
           
         },currentDelay)
-    
+         delay  = currentDelay;
+        return currentDelay += stepValue;
       })
-    currentDelay += stepValue;
+    
   }
     
   
@@ -67,3 +70,4 @@ function onDelayChange() {
 function onStepChange() {
   return refs.step.value;
 }
+
